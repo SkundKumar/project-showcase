@@ -1153,6 +1153,7 @@ const InfiniteMenu: FC<InfiniteMenuProps> = ({ items = [] }) => {
           text-white hidden lg:block
           max-w-[25vw]
           leading-tight
+          break-words
           ${
             isMoving
               ? 'opacity-0 pointer-events-none duration-[100ms]'
@@ -1168,7 +1169,7 @@ const InfiniteMenu: FC<InfiniteMenuProps> = ({ items = [] }) => {
             className={`
           select-none
           absolute
-          max-w-[10ch]
+          max-w-[20ch]
           text-[1.5rem]
           top-1/2
           right-[1%]
@@ -1176,6 +1177,8 @@ const InfiniteMenu: FC<InfiniteMenuProps> = ({ items = [] }) => {
           ease-[cubic-bezier(0.25,0.1,0.25,1.0)]
           text-white hidden lg:block
           playwrite-de-grund-guides-regular
+          leading-relaxed
+          break-words
           ${
             isMoving
               ? 'opacity-0 pointer-events-none duration-[100ms] translate-x-[-60%] -translate-y-1/2'
@@ -1191,9 +1194,9 @@ const InfiniteMenu: FC<InfiniteMenuProps> = ({ items = [] }) => {
             className={`lg:hidden pointer-events-none absolute left-1/2 bottom-6 -translate-x-1/2 w-[92%] max-w-[520px]`}
           >
             <div className={`backdrop-blur-md bg-black/50 text-white rounded-2xl px-4 py-3 shadow-lg transition-opacity ${isMoving ? 'opacity-0' : 'opacity-100'}`}>
-              <div className="flex items-center justify-between gap-3">
-                <p className="plaster-regular text-lg font-semibold truncate max-w-[55%]">{activeItem.title}</p>
-                <p className="playwrite-de-grund-guides-regular text-sm text-white/85 text-right truncate max-w-[40%]">{activeItem.description}</p>
+              <div className="flex items-start justify-between gap-3">
+                <p className="plaster-regular text-lg font-semibold break-words max-w-[55%] leading-tight">{activeItem.title}</p>
+                <p className="playwrite-de-grund-guides-regular text-sm text-white/85 text-right break-words max-w-[40%] leading-relaxed">{activeItem.description}</p>
               </div>
             </div>
           </div>
