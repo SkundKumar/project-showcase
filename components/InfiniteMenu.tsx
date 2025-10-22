@@ -1193,7 +1193,7 @@ const InfiniteMenu: FC<InfiniteMenuProps> = ({ items = [] }) => {
 
           {/* Mobile/Tablet: bottom safe overlay card (no button) */}
           <div
-            className={`lg:hidden pointer-events-none absolute left-1/2 bottom-20 sm:bottom-16 -translate-x-1/2 w-[92%] max-w-[520px]`}
+            className={`lg:hidden pointer-events-none absolute left-1/2 bottom-28 sm:bottom-24 -translate-x-1/2 w-[92%] max-w-[520px]`}
             style={{
               paddingBottom: 'env(safe-area-inset-bottom)',
             }}
@@ -1227,7 +1227,7 @@ const InfiniteMenu: FC<InfiniteMenuProps> = ({ items = [] }) => {
           ${
             isMoving
               ? 'bottom-[-80px] opacity-0 pointer-events-none duration-[100ms] scale-0 -translate-x-1/2'
-              : 'bottom-[5rem] sm:bottom-[4rem] lg:bottom-[3.6em] opacity-100 pointer-events-auto duration-[500ms] scale-100 -translate-x-1/2'
+              : 'bottom-[7rem] sm:bottom-[6rem] lg:bottom-[3.6em] opacity-100 pointer-events-auto duration-[500ms] scale-100 -translate-x-1/2'
           }
         `}
             style={{
