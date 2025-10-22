@@ -1116,7 +1116,15 @@ const InfiniteMenu: FC<InfiniteMenuProps> = ({ items = [] }) => {
     };
   }, [items]);
 
-  // No CTA button; showcase focuses on title and description only
+  const handleButtonClick = () => {
+    if (!activeItem?.link) return;
+    const href = activeItem.link;
+    if (href.startsWith('http')) {
+      window.open(href, '_blank');
+    } else {
+      window.location.href = href;
+    }
+  };
 
   return (
     <div className="relative w-full h-full">
@@ -1133,16 +1141,18 @@ const InfiniteMenu: FC<InfiniteMenuProps> = ({ items = [] }) => {
             className={`
           select-none
           absolute
+          plaster-regular
           font-black
-          [font-size:4rem]
+          text-[2.5rem] lg:text-[2.2rem]
           left-[1.6em]
           top-1/2
           transform
-          translate-x-[20%]
           -translate-y-1/2
           transition-all
           ease-[cubic-bezier(0.25,0.1,0.25,1.0)]
           text-white hidden lg:block
+          max-w-[25vw]
+          leading-tight
           ${
             isMoving
               ? 'opacity-0 pointer-events-none duration-[100ms]'
@@ -1165,6 +1175,7 @@ const InfiniteMenu: FC<InfiniteMenuProps> = ({ items = [] }) => {
           transition-all
           ease-[cubic-bezier(0.25,0.1,0.25,1.0)]
           text-white hidden lg:block
+          playwrite-de-grund-guides-regular
           ${
             isMoving
               ? 'opacity-0 pointer-events-none duration-[100ms] translate-x-[-60%] -translate-y-1/2'
@@ -1181,11 +1192,39 @@ const InfiniteMenu: FC<InfiniteMenuProps> = ({ items = [] }) => {
           >
             <div className={`backdrop-blur-md bg-black/50 text-white rounded-2xl px-4 py-3 shadow-lg transition-opacity ${isMoving ? 'opacity-0' : 'opacity-100'}`}>
               <div className="flex items-center justify-between gap-3">
-                <p className="text-base font-semibold truncate max-w-[55%]">{activeItem.title}</p>
-                <p className="text-xs text-white/85 text-right truncate max-w-[40%]">{activeItem.description}</p>
+                <p className="plaster-regular text-lg font-semibold truncate max-w-[55%]">{activeItem.title}</p>
+                <p className="playwrite-de-grund-guides-regular text-sm text-white/85 text-right truncate max-w-[40%]">{activeItem.description}</p>
               </div>
             </div>
           </div>
+
+          {/* Floating action button (opens project) */}
+          <button
+            aria-label="Open project"
+            onClick={handleButtonClick}
+            className={`
+          absolute
+          left-1/2
+          z-10
+          w-[58px]
+          h-[58px]
+          grid
+          place-items-center
+          rounded-full
+          bg-[#5b3df6]
+          text-white
+          shadow-[0_8px_24px_rgba(91,61,246,0.45)]
+          transition-all
+          ease-[cubic-bezier(0.25,0.1,0.25,1.0)]
+          ${
+            isMoving
+              ? 'bottom-[-80px] opacity-0 pointer-events-none duration-[100ms] scale-0 -translate-x-1/2'
+              : 'bottom-[3.6em] opacity-100 pointer-events-auto duration-[500ms] scale-100 -translate-x-1/2'
+          }
+        `}
+          >
+            <span className="text-[22px] leading-none">↗</span>
+          </button>
 
         </>
       )}

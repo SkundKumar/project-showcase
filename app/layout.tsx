@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Geist, Geist_Mono, Plaster, Playwrite_DE_Grund_Guides } from "next/font/google";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -10,6 +10,18 @@ const geistSans = Geist({
 const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
   subsets: ["latin"],
+});
+
+const plaster = Plaster({
+  variable: "--font-plaster",
+  weight: "400",
+  subsets: ["latin"],
+});
+
+const playwrite = Playwrite_DE_Grund_Guides({
+  variable: "--font-playwrite",
+  weight: "400",
+  fallback: ["cursive", "serif"],
 });
 
 export const metadata: Metadata = {
@@ -25,7 +37,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} ${plaster.variable} ${playwrite.variable} antialiased`}
       >
         {children}
       </body>

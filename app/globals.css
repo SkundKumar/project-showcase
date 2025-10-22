@@ -120,3 +120,16 @@
     @apply bg-background text-foreground;
   }
 }
+
+/* Custom font utilities */
+.plaster-regular {
+  font-family: var(--font-plaster), system-ui;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.playwrite-de-grund-guides-regular {
+  font-family: var(--font-playwrite), cursive;
+  font-weight: 400;
+  font-style: normal;
+}

@@ -3,28 +3,28 @@ import InfiniteMenu from "../components/InfiniteMenu";
 export default function Home() {
   const items = [
   {
-    image: '/Screenshot 2025-10-22 145019.png',
-    link: 'https://google.com/',
-    title: 'Item 1',
-    description: 'This is pretty cool, right?'
+    image: '/cpl.webp',
+    link: 'https://cpl-20.vercel.app/',
+    title: 'CPL Website',
+    description: 'Next.js, GSAP, Tailwind Css'
   },
   {
-    image: '/Screenshot 2025-10-22 145053.png',
-    link: 'https://google.com/',
-    title: 'Item 2',
-    description: 'This is pretty cool, right?'
+    image: '/codechef.jpg',
+    link: 'https://codechef-seven.vercel.app/',
+    title: 'Codechef | BU official website',
+    description: 'React.js,     GSAP, and Lottie,'
   },
   {
-    image: '/Screenshot 2025-10-22 145108.png',
-    link: 'https://google.com/',
-    title: 'Item 3',
-    description: 'This is pretty cool, right?'
+    image: '/icisn.png',
+    link: 'https://www.icisn.com/',
+    title: 'ICISN conference (hosted by Springer)',
+    description: ' Next.js, TailwindCSS, GSAP'
   },
   {
-    image: '/Screenshot 2025-10-22 145126.png',
-    link: 'https://google.com/',
-    title: 'Item 4',
-    description: 'This is pretty cool, right?'
+    image: '/tk.png',
+    link: 'https://apple-inspired-casaroule.vercel.app/',
+    title: 'TechKareer success page',
+    description: ' React, TailwindCSS, React bits'
   }
 ];
   return (
