@@ -1144,14 +1144,14 @@ const InfiniteMenu: FC<InfiniteMenuProps> = ({ items = [] }) => {
           plaster-regular
           font-black
           text-[2.5rem] lg:text-[2.2rem]
-          left-[1.6em]
+          left-[2em]
           top-1/2
           transform
           -translate-y-1/2
           transition-all
           ease-[cubic-bezier(0.25,0.1,0.25,1.0)]
           text-white hidden lg:block
-          max-w-[25vw]
+          max-w-[20vw]
           leading-tight
           break-words
           ${
@@ -1169,10 +1169,12 @@ const InfiniteMenu: FC<InfiniteMenuProps> = ({ items = [] }) => {
             className={`
           select-none
           absolute
-          max-w-[20ch]
+          max-w-[15ch]
           text-[1.5rem]
           top-1/2
-          right-[1%]
+          right-[2em]
+          transform
+          -translate-y-1/2
           transition-all
           ease-[cubic-bezier(0.25,0.1,0.25,1.0)]
           text-white hidden lg:block
@@ -1181,8 +1183,8 @@ const InfiniteMenu: FC<InfiniteMenuProps> = ({ items = [] }) => {
           break-words
           ${
             isMoving
-              ? 'opacity-0 pointer-events-none duration-[100ms] translate-x-[-60%] -translate-y-1/2'
-              : 'opacity-100 pointer-events-auto duration-[500ms] translate-x-[-90%] -translate-y-1/2'
+              ? 'opacity-0 pointer-events-none duration-[100ms]'
+              : 'opacity-100 pointer-events-auto duration-[500ms]'
           }
         `}
           >
