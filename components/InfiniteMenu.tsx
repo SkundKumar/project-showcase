@@ -1193,7 +1193,10 @@ const InfiniteMenu: FC<InfiniteMenuProps> = ({ items = [] }) => {
 
           {/* Mobile/Tablet: bottom safe overlay card (no button) */}
           <div
-            className={`lg:hidden pointer-events-none absolute left-1/2 bottom-6 -translate-x-1/2 w-[92%] max-w-[520px]`}
+            className={`lg:hidden pointer-events-none absolute left-1/2 bottom-20 sm:bottom-16 -translate-x-1/2 w-[92%] max-w-[520px]`}
+            style={{
+              paddingBottom: 'env(safe-area-inset-bottom)',
+            }}
           >
             <div className={`backdrop-blur-md bg-black/50 text-white rounded-2xl px-4 py-3 shadow-lg transition-opacity ${isMoving ? 'opacity-0' : 'opacity-100'}`}>
               <div className="flex items-start justify-between gap-3">
@@ -1224,9 +1227,12 @@ const InfiniteMenu: FC<InfiniteMenuProps> = ({ items = [] }) => {
           ${
             isMoving
               ? 'bottom-[-80px] opacity-0 pointer-events-none duration-[100ms] scale-0 -translate-x-1/2'
-              : 'bottom-[3.6em] opacity-100 pointer-events-auto duration-[500ms] scale-100 -translate-x-1/2'
+              : 'bottom-[5rem] sm:bottom-[4rem] lg:bottom-[3.6em] opacity-100 pointer-events-auto duration-[500ms] scale-100 -translate-x-1/2'
           }
         `}
+            style={{
+              paddingBottom: 'env(safe-area-inset-bottom)',
+            }}
           >
             <span className="text-[22px] leading-none">↗</span>
           </button>
