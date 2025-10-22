@@ -843,10 +843,36 @@ class InfiniteGridMenu {
           })
       )
     ).then(images => {
+      const drawCover = (
+        image: HTMLImageElement,
+        dx: number,
+        dy: number,
+        dSize: number
+      ) => {
+        const iw = image.naturalWidth || image.width;
+        const ih = image.naturalHeight || image.height;
+        const ir = iw / ih;
+        const dr = 1; // square cell
+        let sw = iw;
+        let sh = ih;
+        if (ir > dr) {
+          // image is wider -> crop sides
+          sh = ih;
+          sw = ih * dr;
+        } else {
+          // image is taller -> crop top/bottom
+          sw = iw;
+          sh = iw / dr;
+        }
+        const sx = (iw - sw) / 2;
+        const sy = (ih - sh) / 2;
+        ctx.drawImage(image, sx, sy, sw, sh, dx, dy, dSize, dSize);
+      };
+
       images.forEach((img, i) => {
         const x = (i % this.atlasSize) * cellSize;
         const y = Math.floor(i / this.atlasSize) * cellSize;
-        ctx.drawImage(img, x, y, cellSize, cellSize);
+        drawCover(img, x, y, cellSize);
       });
 
       gl.bindTexture(gl.TEXTURE_2D, this.tex);
@@ -1090,14 +1116,7 @@ const InfiniteMenu: FC<InfiniteMenuProps> = ({ items = [] }) => {
     };
   }, [items]);
 
-  const handleButtonClick = () => {
-    if (!activeItem?.link) return;
-    if (activeItem.link.startsWith('http')) {
-      window.open(activeItem.link, '_blank');
-    } else {
-      console.log('Internal route:', activeItem.link);
-    }
-  };
+  // No CTA button; showcase focuses on title and description only
 
   return (
     <div className="relative w-full h-full">
@@ -1109,11 +1128,12 @@ const InfiniteMenu: FC<InfiniteMenuProps> = ({ items = [] }) => {
 
       {activeItem && (
         <>
+          {/* Desktop/LG screens: large title on left */}
           <h2
             className={`
           select-none
           absolute
-          font-white
+          font-black
           [font-size:4rem]
           left-[1.6em]
           top-1/2
@@ -1122,6 +1142,7 @@ const InfiniteMenu: FC<InfiniteMenuProps> = ({ items = [] }) => {
           -translate-y-1/2
           transition-all
           ease-[cubic-bezier(0.25,0.1,0.25,1.0)]
+          text-white hidden lg:block
           ${
             isMoving
               ? 'opacity-0 pointer-events-none duration-[100ms]'
@@ -1132,6 +1153,7 @@ const InfiniteMenu: FC<InfiniteMenuProps> = ({ items = [] }) => {
             {activeItem.title}
           </h2>
 
+          {/* Desktop/LG screens: description on right */}
           <p
             className={`
           select-none
@@ -1142,6 +1164,7 @@ const InfiniteMenu: FC<InfiniteMenuProps> = ({ items = [] }) => {
           right-[1%]
           transition-all
           ease-[cubic-bezier(0.25,0.1,0.25,1.0)]
+          text-white hidden lg:block
           ${
             isMoving
               ? 'opacity-0 pointer-events-none duration-[100ms] translate-x-[-60%] -translate-y-1/2'
@@ -1152,32 +1175,18 @@ const InfiniteMenu: FC<InfiniteMenuProps> = ({ items = [] }) => {
             {activeItem.description}
           </p>
 
+          {/* Mobile/Tablet: bottom safe overlay card (no button) */}
           <div
-            onClick={handleButtonClick}
-            className={`
-          absolute
-          left-1/2
-          z-10
-          w-[60px]
-          h-[60px]
-          grid
-          place-items-center
-          bg-[#00ffff]
-          border-[5px]
-          border-black
-          rounded-full
-          cursor-pointer
-          transition-all
-          ease-[cubic-bezier(0.25,0.1,0.25,1.0)]
-          ${
-            isMoving
-              ? 'bottom-[-80px] opacity-0 pointer-events-none duration-[100ms] scale-0 -translate-x-1/2'
-              : 'bottom-[3.8em] opacity-100 pointer-events-auto duration-[500ms] scale-100 -translate-x-1/2'
-          }
-        `}
+            className={`lg:hidden pointer-events-none absolute left-1/2 bottom-6 -translate-x-1/2 w-[92%] max-w-[520px]`}
           >
-            <p className="select-none relative text-[#060010] top-[2px] text-[26px]">&#x2197;</p>
+            <div className={`backdrop-blur-md bg-black/50 text-white rounded-2xl px-4 py-3 shadow-lg transition-opacity ${isMoving ? 'opacity-0' : 'opacity-100'}`}>
+              <div className="flex items-center justify-between gap-3">
+                <p className="text-base font-semibold truncate max-w-[55%]">{activeItem.title}</p>
+                <p className="text-xs text-white/85 text-right truncate max-w-[40%]">{activeItem.description}</p>
+              </div>
+            </div>
           </div>
+
         </>
       )}
     </div>
